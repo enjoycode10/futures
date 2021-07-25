@@ -12,16 +12,19 @@
 """
 Fatures:    大连商品交易所--- 日行情数据
 """
+from abc import ABC
+
 from scrapy.spiders import Spider
 from scrapy.http import Request, Response, FormRequest
 import chardet
 import datetime, time, logging
 from futures.items.day_quotes import DayQuotesItem
 
-dalian_item = ['聚乙烯', '聚丙烯', '聚氯乙烯']
+dalian_item = ["豆一", "豆二", "豆粕", "豆油", "棕榈油", "玉米", "玉米淀粉", "鸡蛋", "粳米", "纤维板", "胶合板", "生猪",
+               "聚乙烯", "聚氯乙烯", "聚丙烯", "苯乙烯", "焦炭", "焦煤", "铁矿石", "乙二醇", "液化石油气"]
 
 
-class DayQuotes(Spider):
+class DayQuotes(Spider, ABC):
     name = 'dalian_day_quotes'
 
     def start_requests(self):
@@ -29,12 +32,13 @@ class DayQuotes(Spider):
         headers = {
             'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
             'Accept-Language': 'zh-CN,zh;q=0.8',
-            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.104 Safari/537.36',
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) '
+                          'Chrome/59.0.3071.104 Safari/537.36',
             'Host': 'www.dce.com.cn',
             'Origin': 'http://www.dce.com.cn',
             'Referer': 'http://www.dce.com.cn/publicweb/quotesdata/dayQuotesCh.html'
         }
-        the_date_list = self.get_datlist(8)
+        the_date_list = self.get_datelist(2393)
         # the_date_list = ['2017-06-17']
         for date_item in the_date_list:
             # date_item = '2017-06-20'
@@ -76,18 +80,19 @@ class DayQuotes(Spider):
                             day_quotes_item['goods_name'] = 'PVC'
                         elif new_item[0] == '聚丙烯':
                             day_quotes_item['goods_name'] = 'PP'
+                        else:
+                            day_quotes_item['goods_name'] = new_item[0]
 
-                        # day_quotes_item['goods_name'] = new_item[0]
                         day_quotes_item['delivery_month'] = delivery_month
 
                         day_quotes_item['open_price'] = new_item[2]
-                        if new_item[2] == None:
+                        if new_item[2] is None:
                             day_quotes_item['open_price'] = 0
                         day_quotes_item['highest_price'] = new_item[3]
-                        if new_item[3] == None:
+                        if new_item[3] is None:
                             day_quotes_item['highest_price'] = 0
                         day_quotes_item['lowest_price'] = new_item[4]
-                        if new_item[4] == None:
+                        if new_item[4] is None:
                             day_quotes_item['lowest_price'] = 0
                         day_quotes_item['close_price'] = new_item[5]
                         day_quotes_item['pre_settlement_price'] = new_item[6]
@@ -105,9 +110,6 @@ class DayQuotes(Spider):
                         # logging.info('{}  {}'.format(item.__len__(), item))
                 else:
                     logging.info('{} 过滤 小计数据 ：{}'.format(data_date, item))
-
-
-
             else:
                 logging.info('清除 空 list')
 
@@ -117,10 +119,9 @@ class DayQuotes(Spider):
         if data == '-':
             return None
         else:
-
             return data.replace(',', '')
 
-    def get_datlist(self, day_num):
+    def get_datelist(self, day_num):
         """
         获取日期列表
         

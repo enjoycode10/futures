@@ -1,6 +1,6 @@
-/***create database if not exists `hsh_fx`;***/
+/***create database if not exists `futures`;***/
 /*** 创建 大连 日行情表 **/
-use `hsh_fx`;
+use `futures`;
 DROP TABLE if EXISTS `t_dalian_dayquotes`;
 CREATE TABLE `t_dalian_dayquotes` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
@@ -21,11 +21,11 @@ CREATE TABLE `t_dalian_dayquotes` (
   `data_date` datetime DEFAULT NULL COMMENT '数据日期',
   `updated` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '数据更新日期',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=232605 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=992605 DEFAULT CHARSET=utf8;
 
 
 /**     大连夜盘行情  *****/
-use `hsh_fx`;
+use `futures`;
 DROP TABLE if EXISTS `t_dalian_nightquotes`;
 CREATE TABLE `t_dalian_nightquotes` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
@@ -77,9 +77,9 @@ CREATE TABLE `t_zhengzhou_dayquotes` (
 
 
 
-/***create database if not exists `hsh_fx`;***/
+/***create database if not exists `futures`;***/
 /*** 创建   日行情表 **/
-use `hsh_fx`;
+use `futures`;
 drop TABLE  if EXISTS t_dayquotes;
 CREATE TABLE `t_dayquotes` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
@@ -91,14 +91,14 @@ CREATE TABLE `t_dayquotes` (
   `close_price` double DEFAULT NULL COMMENT '收盘价',
   `pre_settlement_price` double DEFAULT NULL COMMENT '前结算价',
   `settlement_price` double DEFAULT NULL COMMENT '今结算价',
-	`deal_volume` double DEFAULT NULL COMMENT '成交量',
+  `deal_volume` double DEFAULT NULL COMMENT '成交量',
   `position_volume` double DEFAULT NULL COMMENT '持仓量',
   `change_1` double DEFAULT NULL COMMENT '涨跌1',
   `change_2` double DEFAULT NULL COMMENT '涨跌2',
 
   `position_volume_change` double DEFAULT NULL COMMENT '持仓量变化',
   `deal_amount` double DEFAULT NULL COMMENT '成交额',
-  `data_date` datetime DEFAULT NULL COMMENT '数据日期',
+  `quote_date` datetime DEFAULT NULL COMMENT '数据日期',
   `updated` datetime DEFAULT CURRENT_TIMESTAMP COMMENT '数据更新日期',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;

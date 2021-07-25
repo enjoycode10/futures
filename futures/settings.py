@@ -102,16 +102,16 @@ ITEM_PIPELINES = {
 #     "host": "192.168.4.238:3306",
 #     "user": "yong",
 #     "pwd": "19950105",
-#     "db": "hsh_fx",
+#     "db": "futures",
 #     "charset": "utf8"
 # }
 
 
 CONNECT_MYSQL = {
-    "host": "66.112.216.105:3306",
+    "host": "127.0.0.1:3306",
     "user": "root",
-    "pwd": "MICrosoft1995@vps",
-    "db": "wqy",
+    "pwd": "Ws326326$",
+    "db": "futures",
     "charset": "utf8"
 }
 # CONNECT_MYSQL = {
@@ -122,7 +122,7 @@ CONNECT_MYSQL = {
 #     "charset": "utf8"
 # }
 
-TABLE_LIST = ['fsc_dayquotes']
+TABLE_LIST = ['t_dayquotes']
 
 # 日志设置
 LOG_ENABLED = False

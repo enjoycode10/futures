@@ -44,7 +44,6 @@ def _conn(db, only=None):
     # 创建数据会话
     session = scoped_session(session_factory)
 
-
     return session, base
 
 
@@ -65,11 +64,14 @@ def conn_orm(DB, TABLENAME):
 
 
 if __name__ == '__main__':
-    db = {'host': '115.28.93.101:3306',
-          'user': 'zhongtai',
-          'pwd': 'CQC$zRp1nMSu94nT',
-          'db': 'hsh_zt',
-          'charset': 'utf8'}
+    db = {
+        "host": "localhost:3306",
+        "user": "root",
+        "pwd": "Ws326326$",
+        "db": "futures",
+        "charset": "utf8",
+        "unix_socket": "/tmp/mysql.sock"
+    }
 
     session, base = _conn(db, only=['crm_user_title'])
     user = base.classes['crm_user_title']

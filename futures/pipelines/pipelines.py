@@ -30,7 +30,7 @@ class FuturesPipeline(object):
                 result = self.session.query(day_quotes.id).filter(day_quotes.goods_name == item.get('goods_name'),
                                                                   day_quotes.quote_date == item.get('quote_date'),
                                                                   day_quotes.delivery_month == item.get(
-                                                                      'delivery_month'))
+                                                                'delivery_month'))
                 result_list = list(result)
 
                 # 修改 数据默认值
@@ -243,7 +243,7 @@ class FuturesPipeline(object):
             logging.info('打开管道')
             self.session, self.base = _conn(CONNECT_MYSQL, TABLE_LIST)
 
-            logging.info('连接 MySQL  hsh_fx 成功，参数为：{}'.format(CONNECT_MYSQL))
+            logging.info('连接 MySQL  futures 成功，参数为：{}'.format(CONNECT_MYSQL))
         except Exception as e:
             logging.critical('连接 MySQL 失败')
             self.session, self.base = None, None

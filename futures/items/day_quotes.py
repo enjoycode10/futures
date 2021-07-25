@@ -24,19 +24,12 @@
 from scrapy import Field, Item
 
 
-
-
-
-
-
 class ZhengZhouVarietyItem(Item):
     """
     郑州期货分类
     """
     code = Field()  # 代码
     name = Field()  # 种类名称
-
-
 
 
 class DayQuotesItem(Item):
@@ -54,7 +47,7 @@ class DayQuotesItem(Item):
 
     deal_volume = Field()  # 总成交量
     position_volume = Field()  # 持仓量
-    position_volume_change = Field() # 持仓量变化
+    position_volume_change = Field()  # 持仓量变化
     change_1 = Field()  # 涨跌 1
     change_2 = Field()  # 涨跌 2
 
